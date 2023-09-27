@@ -1,0 +1,45 @@
+/* Lógico_1: */
+
+CREATE TABLE proprietario (
+    nome varchar(50),
+    id integer PRIMARY KEY,
+    telefone varchar(50)
+);
+
+CREATE TABLE condominio (
+    valor decimal,
+    data_pagamento date,
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE apartamento (
+    tipo_ocupacao varchar(50),
+    id integer PRIMARY KEY,
+    numero integer,
+    n_quarto integer,
+    fk_proprietario_id integer,
+    fk_condominio_id integer
+);
+
+CREATE TABLE despesa (
+    referencia varchar(50),
+    id integer PRIMARY KEY,
+    valor decimal,
+    fator_parcelamento integer,
+    fk_apartamento_id integer
+);
+ 
+ALTER TABLE apartamento ADD CONSTRAINT FK_apartamento_2
+    FOREIGN KEY (fk_proprietario_id)
+    REFERENCES proprietario (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE apartamento ADD CONSTRAINT FK_apartamento_3
+    FOREIGN KEY (fk_condominio_id)
+    REFERENCES condominio (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE despesa ADD CONSTRAINT FK_despesa_2
+    FOREIGN KEY (fk_apartamento_id)
+    REFERENCES apartamento (id)
+    ON DELETE RESTRICT;

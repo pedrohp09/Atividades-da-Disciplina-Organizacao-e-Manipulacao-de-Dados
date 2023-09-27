@@ -1,0 +1,22 @@
+/* Lógico_1: */
+
+CREATE TABLE agenda (
+    nome_contato varchar(100),
+    numero_telefone varchar(50),
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE ligacao (
+    hora_ligacao time,
+    minutos_gasto integer,
+    data_ligacao date,
+    numero_pulso integer,
+    id integer PRIMARY KEY,
+    telefone_discado varchar(50),
+    fk_agenda_id integer
+);
+ 
+ALTER TABLE ligacao ADD CONSTRAINT FK_ligacao_2
+    FOREIGN KEY (fk_agenda_id)
+    REFERENCES agenda (id)
+    ON DELETE SET NULL;

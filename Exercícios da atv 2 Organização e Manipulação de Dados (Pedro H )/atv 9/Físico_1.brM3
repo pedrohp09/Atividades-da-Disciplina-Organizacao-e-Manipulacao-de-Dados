@@ -1,0 +1,47 @@
+/* Lógico_1: */
+
+CREATE TABLE amigo (
+    nome_mae varchar(50),
+    nome varchar(50),
+    origem varchar(50),
+    telefone varchar(50),
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE caixa (
+    id integer PRIMARY KEY,
+    numero integer,
+    etiqueta varchar(50),
+    cor varchar(50)
+);
+
+CREATE TABLE emprestimo (
+    data_emprestimo date,
+    id integer PRIMARY KEY,
+    data_devolucao date,
+    fk_amigo_id integer,
+    fk_revista_id integer
+);
+
+CREATE TABLE revista (
+    n_edicao integer,
+    id integer PRIMARY KEY,
+    ano varchar(4),
+    tipo varchar(50),
+    fk_caixa_id integer
+);
+ 
+ALTER TABLE emprestimo ADD CONSTRAINT FK_emprestimo_2
+    FOREIGN KEY (fk_amigo_id)
+    REFERENCES amigo (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE emprestimo ADD CONSTRAINT FK_emprestimo_3
+    FOREIGN KEY (fk_revista_id)
+    REFERENCES revista (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE revista ADD CONSTRAINT FK_revista_2
+    FOREIGN KEY (fk_caixa_id)
+    REFERENCES caixa (id)
+    ON DELETE RESTRICT;

@@ -1,0 +1,22 @@
+/* Lógico_2: */
+
+CREATE TABLE tarefas (
+    prioridade float,
+    id interger PRIMARY KEY,
+    nome varchar(100),
+    data_limite date,
+    percentual_concluido float,
+    detalhamento varchar(100)
+);
+
+CREATE TABLE Execucao (
+    percentual float,
+    descricao varchar(100),
+    data_execucao date,
+    fk_tarefas_id interger
+);
+ 
+ALTER TABLE Execucao ADD CONSTRAINT FK_Execucao_1
+    FOREIGN KEY (fk_tarefas_id)
+    REFERENCES tarefas (id)
+    ON DELETE RESTRICT;

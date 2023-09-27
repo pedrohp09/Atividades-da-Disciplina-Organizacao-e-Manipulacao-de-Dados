@@ -1,0 +1,53 @@
+/* Lógico_1: */
+
+CREATE TABLE paciente (
+    id integer PRIMARY KEY,
+    nome varchar(50),
+    data_nascimento date,
+    e_mail varchar(100),
+    _primeira_consulta date,
+    endereco varchar(100),
+    plano_saude varchar(50),
+    telefone varchar(50),
+    tipo varchar(50)
+);
+
+CREATE TABLE consulta (
+    tipo_ varchar(50),
+    hora time,
+    consultorio varchar(50),
+    data date,
+    id integer PRIMARY KEY,
+    paciente varchar(50),
+    fk_paciente_id integer
+);
+
+CREATE TABLE plano_de_saude (
+    nome_ varchar(50),
+    id integer PRIMARY KEY,
+    limite_consultas_mes integer,
+    fk_paciente_id integer
+);
+
+CREATE TABLE consultorio (
+    localizacao_ varchar(100),
+    id integer PRIMARY KEY,
+    dias_atendimento text,
+    horario_atendimento time,
+    fk_consulta_id integer
+);
+ 
+ALTER TABLE consulta ADD CONSTRAINT FK_consulta_2
+    FOREIGN KEY (fk_paciente_id)
+    REFERENCES paciente (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE plano_de_saude ADD CONSTRAINT FK_plano_de_saude_2
+    FOREIGN KEY (fk_paciente_id)
+    REFERENCES paciente (id)
+    ON DELETE SET NULL;
+ 
+ALTER TABLE consultorio ADD CONSTRAINT FK_consultorio_2
+    FOREIGN KEY (fk_consulta_id)
+    REFERENCES consulta (id)
+    ON DELETE RESTRICT;

@@ -1,0 +1,62 @@
+/* Lógico_1: */
+
+CREATE TABLE jogador (
+    id integer PRIMARY KEY,
+    nome varchar(50),
+    pontuacao decimal
+);
+
+CREATE TABLE rodada (
+    frase text,
+    n_palavras varchar(100),
+    letras_erradas text,
+    id integer PRIMARY KEY,
+    fk_boneco_id integer
+);
+
+CREATE TABLE frase (
+    tema varchar(50),
+    conteudo varchar(50),
+    id integer PRIMARY KEY,
+    status varchar(50)
+);
+
+CREATE TABLE boneco (
+    numero_peca_revelada integer,
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE joga (
+    fk_rodada_id integer,
+    fk_jogador_id integer
+);
+
+CREATE TABLE contem (
+    fk_rodada_id integer,
+    fk_frase_id integer
+);
+ 
+ALTER TABLE rodada ADD CONSTRAINT FK_rodada_2
+    FOREIGN KEY (fk_boneco_id)
+    REFERENCES boneco (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE joga ADD CONSTRAINT FK_joga_1
+    FOREIGN KEY (fk_rodada_id)
+    REFERENCES rodada (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE joga ADD CONSTRAINT FK_joga_2
+    FOREIGN KEY (fk_jogador_id)
+    REFERENCES jogador (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_1
+    FOREIGN KEY (fk_rodada_id)
+    REFERENCES rodada (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_2
+    FOREIGN KEY (fk_frase_id)
+    REFERENCES frase (id)
+    ON DELETE RESTRICT;

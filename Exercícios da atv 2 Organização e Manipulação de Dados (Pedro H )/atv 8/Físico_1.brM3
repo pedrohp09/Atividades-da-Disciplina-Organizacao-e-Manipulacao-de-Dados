@@ -1,0 +1,38 @@
+/* Lógico_1: */
+
+CREATE TABLE caso_uso (
+    id integer PRIMARY KEY,
+    status varchar(50),
+    nome_arquivo varchar(50)
+);
+
+CREATE TABLE pacote (
+    id integer PRIMARY KEY,
+    nome varchar(50),
+    fk_projeto_id integer
+);
+
+CREATE TABLE projeto (
+    nome varchar(50),
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE contem (
+    fk_caso_uso_id integer,
+    fk_pacote_id integer
+);
+ 
+ALTER TABLE pacote ADD CONSTRAINT FK_pacote_2
+    FOREIGN KEY (fk_projeto_id)
+    REFERENCES projeto (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_1
+    FOREIGN KEY (fk_caso_uso_id)
+    REFERENCES caso_uso (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_2
+    FOREIGN KEY (fk_pacote_id)
+    REFERENCES pacote (id)
+    ON DELETE RESTRICT;

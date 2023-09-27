@@ -1,0 +1,52 @@
+/* Lógico_1: */
+
+CREATE TABLE curso (
+    data_termino date,
+    valor_hora_professor decimal,
+    horario_inicio time,
+    nome_professor varchar(200),
+    telefone_professor varchar(50),
+    conteudo_programatico text,
+    carga_horaria integer,
+    data_inicio date,
+    id integer PRIMARY KEY,
+    valor_curso decimal,
+    horario_termino time
+);
+
+CREATE TABLE matricula (
+    data_matricula date,
+    valor_pago decimal,
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE aluno (
+    cpf varchar(50),
+    id integer PRIMARY KEY,
+    data_nascimento date,
+    endereco varchar(200),
+    rg varchar(50),
+    nome varchar(200),
+    telefone varchar(50),
+    fk_matricula_id integer
+);
+
+CREATE TABLE contem (
+    fk_matricula_id integer,
+    fk_curso_id integer
+);
+ 
+ALTER TABLE aluno ADD CONSTRAINT FK_aluno_2
+    FOREIGN KEY (fk_matricula_id)
+    REFERENCES matricula (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_1
+    FOREIGN KEY (fk_matricula_id)
+    REFERENCES matricula (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_2
+    FOREIGN KEY (fk_curso_id)
+    REFERENCES curso (id)
+    ON DELETE RESTRICT;

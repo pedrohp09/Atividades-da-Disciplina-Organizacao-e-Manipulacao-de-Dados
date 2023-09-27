@@ -1,0 +1,34 @@
+/* Lógico_1: */
+
+CREATE TABLE tema (
+    id integer PRIMARY KEY,
+    cor_toalha_mesa varchar(50),
+    valor_aluguel decimal,
+    lista_itens text
+);
+
+CREATE TABLE aluguel (
+    telefone_cliente varchar(50),
+    hora_termino time,
+    valor decimal,
+    hora_inicio time,
+    data date,
+    id integer PRIMARY KEY,
+    tema varchar(50),
+    nome_cliente_ varchar(50)
+);
+
+CREATE TABLE contem (
+    fk_tema_id integer,
+    fk_aluguel_id integer
+);
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_1
+    FOREIGN KEY (fk_tema_id)
+    REFERENCES tema (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_2
+    FOREIGN KEY (fk_aluguel_id)
+    REFERENCES aluguel (id)
+    ON DELETE SET NULL;

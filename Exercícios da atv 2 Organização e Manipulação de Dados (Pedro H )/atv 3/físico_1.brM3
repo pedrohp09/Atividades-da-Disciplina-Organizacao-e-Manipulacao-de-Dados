@@ -1,0 +1,32 @@
+/* Lógico_1: */
+
+CREATE TABLE teste (
+    data_geracao date,
+    disciplina varchar(50),
+    id integer PRIMARY KEY,
+    n_questoes integer
+);
+
+CREATE TABLE questao_disciplina (
+    gabarito varchar(50),
+    bimestre integer,
+    id integer PRIMARY KEY,
+    materia varchar(50),
+    materia varchar(50),
+    resposta varchar(50)
+);
+
+CREATE TABLE contem (
+    fk_questao_disciplina_id integer,
+    fk_teste_id integer
+);
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_1
+    FOREIGN KEY (fk_questao_disciplina_id)
+    REFERENCES questao_disciplina (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE contem ADD CONSTRAINT FK_contem_2
+    FOREIGN KEY (fk_teste_id)
+    REFERENCES teste (id)
+    ON DELETE SET NULL;

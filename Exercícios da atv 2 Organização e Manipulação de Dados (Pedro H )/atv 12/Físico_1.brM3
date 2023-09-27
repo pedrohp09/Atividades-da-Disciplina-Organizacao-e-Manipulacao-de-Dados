@@ -1,0 +1,35 @@
+/* Lógico_1: */
+
+CREATE TABLE concurso (
+    numero_sorteado varchar(50),
+    data_sorteio date,
+    id integer PRIMARY KEY,
+    tipo_jogo varchar(50),
+    fk_resultado_id integer
+);
+
+CREATE TABLE cartao_resultado (
+    data date,
+    numero varchar(50),
+    tipo_jogo varchar(50),
+    id integer PRIMARY KEY,
+    cartao varchar(50),
+    valor_premio float,
+    concurso varchar(50),
+    numero_acertado varchar(50),
+    fk_apostador_id integer
+);
+
+CREATE TABLE apostador (
+    nome varchar(50),
+    id integer PRIMARY KEY
+);
+ 
+ALTER TABLE concurso ADD CONSTRAINT FK_concurso_2
+    FOREIGN KEY (fk_resultado_id)
+    REFERENCES ??? (???);
+ 
+ALTER TABLE cartao_resultado ADD CONSTRAINT FK_cartao_resultado_2
+    FOREIGN KEY (fk_apostador_id)
+    REFERENCES apostador (id)
+    ON DELETE RESTRICT;

@@ -1,0 +1,55 @@
+/* Lógico_1: */
+
+CREATE TABLE assinante (
+    id integer PRIMARY KEY,
+    nome varchar(50),
+    email varchar(100),
+    secoes_interesse varchar(50)
+);
+
+CREATE TABLE anuncio (
+    data_insecao date,
+    conteudo varchar(50),
+    preco varchar(50),
+    secao varchar(50),
+    tipo varchar(50),
+    id integer PRIMARY KEY
+);
+
+CREATE TABLE anunciante (
+    observacao_telefone varchar(100),
+    nome varchar(50),
+    id integer PRIMARY KEY,
+    contato varchar(50),
+    telefones varchar(50)
+);
+
+CREATE TABLE recebe (
+    fk_assinante_id integer,
+    fk_anuncio_id integer
+);
+
+CREATE TABLE publica (
+    fk_anunciante_id integer,
+    fk_anuncio_id integer
+);
+ 
+ALTER TABLE recebe ADD CONSTRAINT FK_recebe_1
+    FOREIGN KEY (fk_assinante_id)
+    REFERENCES assinante (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE recebe ADD CONSTRAINT FK_recebe_2
+    FOREIGN KEY (fk_anuncio_id)
+    REFERENCES anuncio (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE publica ADD CONSTRAINT FK_publica_1
+    FOREIGN KEY (fk_anunciante_id)
+    REFERENCES anunciante (id)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE publica ADD CONSTRAINT FK_publica_2
+    FOREIGN KEY (fk_anuncio_id)
+    REFERENCES anuncio (id)
+    ON DELETE RESTRICT;
